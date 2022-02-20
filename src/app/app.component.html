@@ -1,7 +1,6 @@
 <div class="container d-flex flex-column justify-content-center align-items-center">
+
   <h1 class="m-5">Fruit Store</h1>
-  <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 shadow-lg">
-    <app-fruit *ngFor="let f of fruits" [fruit]="f"></app-fruit>
-  </div>
-  
+  <app-navbar class="mb-3"></app-navbar>
+  <router-outlet></router-outlet>
 </div>
