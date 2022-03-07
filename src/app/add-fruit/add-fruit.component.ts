@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FruitType } from '../classes/fruit';
+import { FruitDataService } from '../fruit-data-service';
 
 @Component({
   selector: 'app-add-fruit',
@@ -20,7 +21,7 @@ export class AddFruitComponent implements OnInit {
 
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, public data:FruitDataService) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -41,6 +42,12 @@ export class AddFruitComponent implements OnInit {
       return;
     }
     console.log(JSON.stringify(this.form.value, null, 2));
+    let currentFruit = this.form.value;
+    currentFruit.type = FruitType[currentFruit.type];
+    currentFruit.photo = currentFruit.photo + ".svg";
+    console.log(currentFruit);
+    this.data.fruits.push(currentFruit);
+    this.onReset();
   }
 
   onReset() : void {
